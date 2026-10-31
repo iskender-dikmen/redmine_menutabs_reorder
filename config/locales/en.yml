@@ -1,0 +1,16 @@
+en:
+  project_tab_titles:
+    overview: "Overview"
+    activity: "Activity"
+    roadmap: "Roadmap"
+    issues: "Issues"
+    time_entries: "Spent time"
+    gantt: "Gantt"
+    calendar: "Calendar"
+    news: "News"
+    documents: "Documents"
+    wiki: "Wiki"
+    boards: "Forums"
+    files: "Files"
+    repository: "Repository"
+    settings: "Settings"
