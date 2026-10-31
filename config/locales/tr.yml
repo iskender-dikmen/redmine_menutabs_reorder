@@ -1,0 +1,16 @@
+tr:
+  project_tab_titles:
+    overview: "Genel"
+    activity: "Aktiviteler"
+    roadmap: "Yol Haritası"
+    issues: "Talepler"
+    time_entries: "Harcanan Zaman"
+    gantt: "İş Zaman Çizelgesi"
+    calendar: "Takvim"
+    news: "Haberler"
+    documents: "Dokümanlar"
+    wiki: "Wiki"
+    boards: "Forumlar"
+    files: "Dosyalar"
+    repository: "Depo"
+    settings: "Ayarlar"
