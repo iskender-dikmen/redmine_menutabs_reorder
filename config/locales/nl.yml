@@ -1,0 +1,16 @@
+nl:
+  project_tab_titles:
+    overview: "Overzicht"
+    activity: "Logboek"
+    roadmap: "Stappenplan"
+    issues: "Taken"
+    time_entries: "Gespendeerde Tijd"
+    gantt: "Planning"
+    calendar: "Kalender"
+    news: "Nieuws"
+    documents: "Vergunningen"
+    wiki: "Wiki"
+    boards: "Forums"
+    files: "Bestanden"
+    repository: "Repository"
+    settings: "Instellingen"

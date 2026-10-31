@@ -1,0 +1,13 @@
+# Ignore local development and test run cache artifacts
+.rb-env
+.bundle/
+vendor/bundle/
+log/*.log
+tmp/
+
+# Ignore IDE settings & OS system files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
