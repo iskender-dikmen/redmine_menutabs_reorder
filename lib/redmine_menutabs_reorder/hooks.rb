@@ -48,14 +48,12 @@ module RedmineMenutabsReorder
 
           # STEP 2: Enforce custom drag-and-drop priority sequence
           sorted_nodes = root_node.children.sort_by do |node|
-            if menu_name == :application_menu && node.name == :projects
-              # Force the global 'Projects' tab to stay at the absolute left of the main menu
-              -2
-            elsif node.name == :new_object || node.name.to_s.start_with?('new_')
+            if node.name == :new_object || node.name.to_s.start_with?('new_')
               # Keeps any creation macros (+ dropdowns) securely anchored at the front indexes
               -1
             else
               # Apply custom drag-and-drop configuration order weights
+              # The 'Projects' tab now naturally respects this weight alongside everything else
               custom_order.index(node.name.to_sym) || 999
             end
           end

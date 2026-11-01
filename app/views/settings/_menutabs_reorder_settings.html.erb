@@ -86,24 +86,37 @@
   
   <ul class="vertical-sortable-list" id="project-tabs-sortable">
     <% 
-      all_known_tabs = {
-        'overview' => 'Overview', 'activity' => 'Activity',
-        'roadmap' => 'Roadmap', 'issues' => 'Issues',
-        'time_entries' => 'Spent time', 'gantt' => 'Gantt', 'calendar' => 'Calendar',
-        'news' => 'News', 'documents' => 'Documents', 'wiki' => 'Wiki', 'boards' => 'Forums',
-        'files' => 'Files', 'repository' => 'Repository',
-        'settings' => 'Settings'
-      }
+      # 1. Dynamically gather all items currently registered across menus
+      dynamic_tabs = {}
+      [:project_menu, :application_menu].each do |menu_name|
+        root_node = Redmine::MenuManager.items(menu_name)
+        if root_node.respond_to?(:children) && root_node.children.present?
+          root_node.children.each do |node|
+            # Skip functional macro dropdowns or native creation items
+            next if node.name == :new_object || node.name.to_s.start_with?('new_')
+
+            # Fetch caption string using Redmine's layout engine evaluation
+            caption_string = node.caption.is_a?(Symbol) ? l(node.caption) : node.caption.to_s
+            dynamic_tabs[node.name.to_s] = caption_string.presence || node.name.to_s.humanize
+          end
+        end
+      end
+
+      # 2. Extract existing configuration arrays safely
       saved_order_string = settings['tab_order'].to_s
       configured_keys = saved_order_string.split(',').map(&:strip)
-      ordered_view_keys = configured_keys.select { |k| all_known_tabs.key?(k) }
-      all_known_tabs.each_key { |k| ordered_view_keys << k unless ordered_view_keys.include?(k) }
+
+      # Filter configuration to keep only tabs that exist in the system right now
+      ordered_view_keys = configured_keys.select { |k| dynamic_tabs.key?(k) }
+
+      # Append newly discovered modules or third-party plugin tabs gracefully to the end
+      dynamic_tabs.each_key { |k| ordered_view_keys << k unless ordered_view_keys.include?(k) }
     %>
     <% ordered_view_keys.each_with_index do |key, index| %>
       <li class="vertical-sort-item" draggable="true" data-key="<%= key %>">
         <div class="left-item-details">
           <span class="sequence-badge"><%= index + 1 %></span>
-          <span><b>☰</b> <strong><%= I18n.t("project_tab_titles.#{key}", default: all_known_tabs[key]) %></strong></span>
+          <span><b>☰</b> <strong><%= I18n.t("project_tab_titles.#{key}", default: dynamic_tabs[key]) %></strong></span>
         </div>
         <span class="tab-key-tag"><%= key %></span>
       </li>
