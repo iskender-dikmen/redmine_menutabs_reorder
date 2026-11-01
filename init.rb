@@ -4,7 +4,7 @@ Redmine::Plugin.register :redmine_menutabs_reorder do
   name 'Redmine Project Menu Tabs Reorder'
   author 'İskender DİKMEN'
   description 'Rearranges project menu tabs.'
-  version '1.0.0'
+  version '1.1.0'
   url 'https://github.com/iskender-dikmen/redmine_menutabs_reorder.git'
   author_url 'https://github.com/iskender-dikmen'
   requires_redmine version_or_higher: '7.0.0'
